@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>20240120_RNASeq_Scripts_Paper</title>
+
+
+<style type="text/css">
+body {
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  padding: 30px; }
+
+body > *:first-child {
+  margin-top: 0 !important; }
+body > *:last-child {
+  margin-bottom: 0 !important; }
+
+a {
+  color: #4183C4; }
+a.absent {
+  color: #cc0000; }
+a.anchor {
+  display: block;
+  padding-left: 30px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  cursor: text;
+  position: relative; }
+
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
+  text-decoration: none; }
+
+h1 tt, h1 code {
+  font-size: inherit; }
+
+h2 tt, h2 code {
+  font-size: inherit; }
+
+h3 tt, h3 code {
+  font-size: inherit; }
+
+h4 tt, h4 code {
+  font-size: inherit; }
+
+h5 tt, h5 code {
+  font-size: inherit; }
+
+h6 tt, h6 code {
+  font-size: inherit; }
+
+h1 {
+  font-size: 28px;
+  color: black; }
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+  color: black; }
+
+h3 {
+  font-size: 18px; }
+
+h4 {
+  font-size: 16px; }
+
+h5 {
+  font-size: 14px; }
+
+h6 {
+  color: #777777;
+  font-size: 14px; }
+
+p, blockquote, ul, ol, dl, li, table, pre {
+  margin: 15px 0; }
+
+hr {
+  background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;
+  border: 0 none;
+  color: #cccccc;
+  height: 4px;
+  padding: 0;
+}
+
+body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+  body > h1:first-child + h2 {
+    margin-top: 0;
+    padding-top: 0; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0; }
+
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
+  margin-top: 0; }
+
+li p.first {
+  display: inline-block; }
+li {
+  margin: 0; }
+ul, ol {
+  padding-left: 30px; }
+
+ul :first-child, ol :first-child {
+  margin-top: 0; }
+
+dl {
+  padding: 0; }
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px; }
+    dl dt:first-child {
+      padding: 0; }
+    dl dt > :first-child {
+      margin-top: 0; }
+    dl dt > :last-child {
+      margin-bottom: 0; }
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px; }
+    dl dd > :first-child {
+      margin-top: 0; }
+    dl dd > :last-child {
+      margin-bottom: 0; }
+
+blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777; }
+  blockquote > :first-child {
+    margin-top: 0; }
+  blockquote > :last-child {
+    margin-bottom: 0; }
+
+table {
+  padding: 0;border-collapse: collapse; }
+  table tr {
+    border-top: 1px solid #cccccc;
+    background-color: white;
+    margin: 0;
+    padding: 0; }
+    table tr:nth-child(2n) {
+      background-color: #f8f8f8; }
+    table tr th {
+      font-weight: bold;
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr td {
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr th :first-child, table tr td :first-child {
+      margin-top: 0; }
+    table tr th :last-child, table tr td :last-child {
+      margin-bottom: 0; }
+
+img {
+  max-width: 100%; }
+
+span.frame {
+  display: block;
+  overflow: hidden; }
+  span.frame > span {
+    border: 1px solid #dddddd;
+    display: block;
+    float: left;
+    overflow: hidden;
+    margin: 13px 0 0;
+    padding: 7px;
+    width: auto; }
+  span.frame span img {
+    display: block;
+    float: left; }
+  span.frame span span {
+    clear: both;
+    color: #333333;
+    display: block;
+    padding: 5px 0 0; }
+span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-center > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: center; }
+  span.align-center span img {
+    margin: 0 auto;
+    text-align: center; }
+span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px 0 0;
+    text-align: right; }
+  span.align-right span img {
+    margin: 0;
+    text-align: right; }
+span.float-left {
+  display: block;
+  margin-right: 13px;
+  overflow: hidden;
+  float: left; }
+  span.float-left span {
+    margin: 13px 0 0; }
+span.float-right {
+  display: block;
+  margin-left: 13px;
+  overflow: hidden;
+  float: right; }
+  span.float-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: right; }
+
+code, tt {
+  margin: 0 2px;
+  padding: 0 5px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px; }
+
+pre code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent; }
+
+.highlight pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+  pre code, pre tt {
+    background-color: transparent;
+    border: none; }
+
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+
+kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 11px;
+  line-height: 10px;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fcfcfc;
+  border: solid 1px #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #bbb
+}
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+  body {
+    padding: 2cm; 
+  }
+  pre code {white-space:pre-wrap !important}
+}
+</style>
+
+<style type="text/css">
+/**
+ * prism.js tomorrow night eighties for JavaScript, CoffeeScript, CSS and HTML
+ * Based on https://github.com/chriskempson/tomorrow-theme
+ * @author Rose Pritchard
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: #ccc;
+	background: none;
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #2d2d2d;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.block-comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: #999;
+}
+
+.token.punctuation {
+	color: #ccc;
+}
+
+.token.tag,
+.token.attr-name,
+.token.namespace,
+.token.deleted {
+	color: #e2777a;
+}
+
+.token.function-name {
+	color: #6196cc;
+}
+
+.token.boolean,
+.token.number,
+.token.function {
+	color: #f08d49;
+}
+
+.token.property,
+.token.class-name,
+.token.constant,
+.token.symbol {
+	color: #f8c555;
+}
+
+.token.selector,
+.token.important,
+.token.atrule,
+.token.keyword,
+.token.builtin {
+	color: #cc99cd;
+}
+
+.token.string,
+.token.char,
+.token.attr-value,
+.token.regex,
+.token.variable {
+	color: #7ec699;
+}
+
+.token.operator,
+.token.entity,
+.token.url {
+	color: #67cdcc;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+
+.token.inserted {
+	color: green;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<h1 id="toc_0">RNA-Seq Workflow for <em>C. difficile</em></h1>
+
+<p>RNA-Seq read processing was performed using a SLURM scheduler and the remote computing services offered by UNC-Chapel Hill. Below are the scripts used to generate the read count matrix used in the 2024 paper. Read cleaning was initially performed in 2020-2021, so scripts may need to be modified for newer versions of bioinformatic tools.</p>
+
+<p>Files moved into and out of the remote workspace using <code>scp -r</code></p>
+
+<h2 id="toc_1">1. Check Sequence Quality with FASTQC</h2>
+
+<p>Script for FASTQC:</p>
+
+<div><pre><code class="language-none">#!/bin/bash
+##
+
+#SBATCH --ntasks=1
+#SBATCH -o /pine/scr/k/f/kfurtado/RNASeq_202006/FastQC/run.out
+#SBATCH -e /pine/scr/k/f/kfurtado/RNASeq_202006/FastQC/run.err
+#SBATCH --mem-per-cpu=10000
+#SBATCH -t 1-00:00:00
+
+echo &quot;Loading FastQC Module&quot;
+
+module load fastqc/0.11.8
+
+echo &quot;FastQC loaded.&quot;
+echo &quot;Running FastQC.&quot;
+
+fastqc /pine/scr/k/f/kfurtado/RNASeq_202006/seqs/RNASeq_202003/* -o /pine/scr/k/f/kfurtado/RNASeq_202006/FastQC/
+
+echo &quot;Finished. Check relevant output and error files in pwd.&quot;
+echo &quot;Transfer FastQC files to local computer using scp -r.&quot;</code></pre></div>
+
+<h2 id="toc_2">2. Trim Poor Quality Ends and Illumina Adapters with Trimmomatic</h2>
+
+<p>Before running script, ensure the paths are set to the correct location for the sequence files, or copy the sequences files to the current directory. Also ensure that the FASTA adapter file from the <a href="https://github.com/usadellab/Trimmomatic">Trimmomatic Github page</a> is loaded in the correct directory.</p>
+
+<p>Content of my adapters.fa file:</p>
+
+<div><pre><code class="language-none">&gt;PrefixPE/1
+TACACTCTTTCCCTACACGACGCTCTTCCGATCT
+&gt;PrefixPE/2
+GTGACTGGAGTTCAGACGTGTGCTCTTCCGATCT
+&gt;PE1
+TACACTCTTTCCCTACACGACGCTCTTCCGATCT
+&gt;PE1_rc
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGTA
+&gt;PE2
+GTGACTGGAGTTCAGACGTGTGCTCTTCCGATCT
+&gt;PE2_rc
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC</code></pre></div>
+
+<p>Script to run Trimmomatic:</p>
+
+<div><pre><code class="language-none">#!/bin/bash
+##
+
+#SBATCH --ntasks=1
+#SBATCH -o /pine/scr/k/f/kfurtado/RNASeq_Analysis_202006/Trimmomatic/run.out
+#SBATCH -e /pine/scr/k/f/kfurtado/RNASeq_Analysis_202006/Trimmomatic/run.err
+#SBATCH --mem-per-cpu=10000
+#SBATCH -t 1-00:00:00
+
+echo &quot;Loading Trimmomatic Module&quot;
+
+module load trimmomatic/0.36
+
+echo &quot;Trimmomatic loaded.&quot;
+echo &quot;Running Trimmomatic to loop through all 9 pairs of files.&quot;
+echo &quot;Trimmomatic being run in PE mode, using palindromic adapter trimming to remove TruSeq3 adapters. Adapter file available from Trimmomatic GitHub page.&quot;
+
+for basename in 1A 1B 1C 2A 2B 2C 3A 3B 3C
+do
+    time trimmomatic PE -phred33 -basein /pine/scr/k/f/kfurtado/RNASeq_Analysis_202006/Sequences/${basename}_R1_001.fastq.gz -baseout ${basename}_filtered.fastq.gz ILLUMINACLIP:/pine/scr/k/f/kfurtado/RNASeq_202006/Trimmomatic/adapters.fa:1:30:10:2:true SLIDINGWINDOW:5:25 MAXINFO:50:0.8 LEADING:30 TRAILING:25 MINLEN:40
+done
+
+echo &quot;Finished running trimmomatic. Check .out and .err files in pwd for information.&quot;
+echo &quot;For each pair of input forward and reverse reads, there should be 4 output files, for paired and unpaired from each direction.&quot; </code></pre></div>
+
+<h3 id="toc_3">2b. Test effectiveness of trimming using FASTQC</h3>
+
+<p>Use scripts similar to those step 1 to check.</p>
+
+<h2 id="toc_4">3. Create an environment for running Fastq_screen and FLASH2.</h2>
+
+<div><pre><code class="language-none">module load anaconda
+conda create -n fastq-screen-env -c bioconda fastq-screen</code></pre></div>
+
+<p><strong>Note</strong>: Only Fastq screen ended up being used in the final workflow. This step is only required if the remote computing cluster does not have Fastq_screen.</p>
+
+<h2 id="toc_5">4. Remove Potential Contaminating genomes with Fastq_screen</h2>
+
+<p>To use Fastq_Screen, must first build indices of each potential contaminating genome using Bowtie2-build.</p>
+
+<p>For Mucin RNA-Seq project, potential contaminating genomes are:</p>
+
+<ul>
+<li><em>Homo sapiens</em> mitochondrion: NC_012920.1</li>
+<li>PhiX 174 Genome: NC_001422.1</li>
+<li><em>Sus scrofa</em> mitochondrion: NC_000845.1</li>
+</ul>
+
+<p><strong>Note</strong>: For 2024 paper, only sequences containing human mucus were considered, so removing reads from <em>Sus scrofa</em> is technically not required. </p>
+
+<p>Genomes should be downloaded from NCBI in FASTA format and then transferred to the working directory in Longleaf via <code>scp -r</code></p>
+
+<p>Then, build genomes using bowtie2-build:</p>
+
+<div><pre><code class="language-none">#!/bin/bash
+##
+
+#SBATCH --ntasks=1
+#SBATCH -o /pine/scr/k/f/kfurtado/RNASeq_Analysis_202006/Fastq_screen/build_run.out
+#SBATCH -e /pine/scr/k/f/kfurtado/RNASeq_Analysis_202006/Fastq_screen/build_run.err
+#SBATCH --mem-per-cpu=10000
+#SBATCH -t 8-00:00:00
+
+echo &quot;Loading bowtie2 to build indexes.&quot;
+
+module load bowtie2/2.4.1
+
+echo &quot;Building index using phage genome from NCBI Genomes database.&quot;
+
+time bowtie2-build -f ./nc001422.1_phix_174.fasta phix174
+
+echo &quot;Building index using pig mitochondrial genome from NCBI Genomes database.&quot;
+
+time bowtie2-build -f ./nc000845.1_sus_scrofa_mt.fasta pig_mt
+
+echo &quot;Building index using human mitochondrial genome from NCBI Genomes database.&quot;
+
+time bowtie2-build -f ./nc012920.1_homo_sapiens_mt.fasta human_mt
+
+echo &quot;Indexing complete. 6 basefiles should be created for each genome.&quot;</code></pre></div>
+
+<p>Then, created and moved all basefiles into separate directories for each reference genome. Example for pig_mt subdirectory: </p>
+
+<div><pre><code class="language-none">(base) [kfurtado@longleaf-login2 pig_mt]$ ls -l
+total 8352
+-rw-r--r-- 1 kfurtado users 4200087 Jul 28 14:21 pig_mt.1.bt2
+-rw-r--r-- 1 kfurtado users    4160 Jul 28 14:21 pig_mt.2.bt2
+-rw-r--r-- 1 kfurtado users      17 Jul 28 14:21 pig_mt.3.bt2
+-rw-r--r-- 1 kfurtado users    4154 Jul 28 14:21 pig_mt.4.bt2
+-rw-r--r-- 1 kfurtado users 4200087 Jul 28 14:21 pig_mt.rev.1.bt2
+-rw-r--r-- 1 kfurtado users    4160 Jul 28 14:21 pig_mt.rev.2.bt2</code></pre></div>
+
+<p>Script for Fastq_screen:</p>
+
+<p>A few notes:</p>
+
+<ul>
+<li>The .conf file <em>must</em> be named &ldquo;fastq_screen.conf&rdquo; (note the underscore, not a dash).</li>
+<li>The .conf file <em>must</em> be in the program directory (within the environment), not in the working directory.<br></li>
+</ul>
+
+<div><pre><code class="language-none">#!/bin/bash
+##
+
+#SBATCH --ntasks=1
+#SBATCH -o /pine/scr/k/f/kfurtado/RNASeq_Analysis_202006/Fastq_screen/run.out
+#SBATCH -e /pine/scr/k/f/kfurtado/RNASeq_Analysis_202006/Fastq_screen/run.err
+#SBATCH --mem-per-cpu=10000
+#SBATCH -t 8-00:00:00
+
+echo &quot;Load Fastq_screen environment from conda.&quot;
+
+source activate fastq-screen-env
+
+echo &quot;Environment loaded.&quot;
+echo &quot;Loading bowtie2 v. 2.4.1 module required for Fastq_screen.&quot;
+
+module load bowtie2/2.4.1
+
+echo &quot;Running fastq_screen to check trimmed reads for hits within PhiX and Sus Scrofa and Human mitochondrial genomes.&quot;
+
+for basename in 1A 1B 1C 2A 2B 2C 3A 3B 3C 
+    do
+    for suffix in 1P 1U 2P 2U
+        do time /nas/longleaf/home/kfurtado/apps/miniconda3/envs/fastq-screen-env/share/fastq-screen-0.14.0-1/fastq_screen --threads 8 --subset 0 --aligner bowtie2 --force --nohits /pine/scr/k/f/kfurtado/RNASeq_Analysis_202006/Trimmomatic/${basename}_filtered_${suffix}.fastq.gz
+    done
+done
+
+echo &quot;Reads should be screened, check output files.&quot;
+echo &quot;Deactivate Fastq_screen environment.&quot;
+
+source deactivate fastq-screen-env
+
+echo &quot;Next, run FastQC for final assessment of quality.&quot;</code></pre></div>
+
+<p>Original .conf file: </p>
+
+<div><pre><code class="language-none"># This is an example configuration file for FastQ Screen
+
+############################
+## Bowtie, Bowtie 2 or BWA #
+############################
+## If the Bowtie, Bowtie 2 or BWA binary is not in your PATH, you can set 
+## this value to tell the program where to find your chosen aligner.  Uncomment 
+## the relevant line below and set the appropriate location.  Please note, 
+## this path should INCLUDE the executable filename.
+
+#BOWTIE /usr/local/bin/bowtie/bowtie
+#BOWTIE2 /usr/local/bowtie2/bowtie2
+#BWA /usr/local/bwa/bwa
+
+
+
+############################################
+## Bismark (for bisulfite sequencing only) #
+############################################
+## If the Bismark binary is not in your PATH then you can set this value to 
+## tell the program where to find it.  Uncomment the line below and set the 
+## appropriate location. Please note, this path should INCLUDE the executable 
+## filename.
+
+#BISMARK    /usr/local/bin/bismark/bismark
+
+
+
+############
+## Threads #
+############
+## Genome aligners can be made to run across multiple CPU cores to speed up 
+## searches.  Set this value to the number of cores you want for mapping reads.
+
+THREADS     8
+
+
+
+##############
+## DATABASES #
+##############
+## This section enables you to configure multiple genomes databases (aligner index 
+## files) to search against in your screen.  For each genome you need to provide a 
+## database name (which can&#39;t contain spaces) and the location of the aligner index 
+## files.
+##
+## The path to the index files SHOULD INCLUDE THE BASENAME of the index, e.g:
+## /data/public/Genomes/Human_Bowtie/GRCh37/Homo_sapiens.GRCh37
+## Thus, the index files (Homo_sapiens.GRCh37.1.bt2, Homo_sapiens.GRCh37.2.bt2, etc.) 
+## are found in a folder named &#39;GRCh37&#39;.
+##
+## If, for example, the Bowtie, Bowtie2 and BWA indices of a given genome reside in 
+## the SAME FOLDER, a SINLGE path may be provided to ALL the of indices.  The index 
+## used will be the one compatible with the chosen aligner (as specified using the 
+## --aligner flag).  
+##
+## The entries shown below are only suggested examples, you can add as many DATABASE 
+## sections as required, and you can comment out or remove as many of the existing 
+## entries as desired.  We suggest including genomes and sequences that may be sources 
+## of contamination either because they where run on your sequencer previously, or may 
+## have contaminated your sample during the library preparation step.
+##
+## Human - sequences available from
+## ftp://ftp.ensembl.org/pub/current/fasta/homo_sapiens/dna/
+#DATABASE   Human   /data/public/Genomes/Human_Bowtie/GRCh37/Homo_sapiens.GRCh37
+##
+## Mouse - sequence available from
+## ftp://ftp.ensembl.org/pub/current/fasta/mus_musculus/dna/
+#DATABASE   Mouse   /data/public/Genomes/Mouse/NCBIM37/Mus_musculus.NCBIM37
+##
+## Ecoli- sequence available from EMBL accession U00096.2
+#DATABASE   Ecoli   /data/public/Genomes/Ecoli/Ecoli
+##
+## PhiX - sequence available from Refseq accession NC_001422.1
+#DATABASE   PhiX    /data/public/Genomes/PhiX/phi_plus_SNPs
+##
+## Adapters - sequence derived from the FastQC contaminats file found at: www.bioinformatics.babraham.ac.uk/projects/fastqc
+#DATABASE   Adapters    /data/public/Genomes/Contaminants/Contaminants
+##
+## Vector - Sequence taken from the UniVec database
+## http://www.ncbi.nlm.nih.gov/VecScreen/UniVec.html
+#DATABASE   Vectors     /data/public/Genomes/Vectors/Vectors</code></pre></div>
+
+<p>Edited .conf file for genomes of interest and to specify path to the aligner:</p>
+
+<div><pre><code class="language-none"># This is the EDITED configuration file for Fastq_screen
+# Lines to be used have the # removed from the first line of the file.
+
+############################
+## Bowtie, Bowtie 2 or BWA #
+############################
+## If the Bowtie, Bowtie 2 or BWA binary is not in your PATH, you can set 
+## this value to tell the program where to find your chosen aligner.  Uncomment 
+## the relevant line below and set the appropriate location.  Please note, 
+## this path should INCLUDE the executable filename.
+
+#BOWTIE /usr/local/bin/bowtie/bowtie
+BOWTIE2 /nas/longleaf/home/kfurtado/apps/miniconda3/envs/flash2env/bin/bowtie2
+#BWA /usr/local/bwa/bwa
+
+
+
+############################################
+## Bismark (for bisulfite sequencing only) #
+############################################
+## If the Bismark binary is not in your PATH then you can set this value to 
+## tell the program where to find it.  Uncomment the line below and set the 
+## appropriate location. Please note, this path should INCLUDE the executable 
+## filename.
+
+#BISMARK    /usr/local/bin/bismark/bismark
+
+
+
+############
+## Threads #
+############
+## Genome aligners can be made to run across multiple CPU cores to speed up 
+## searches.  Set this value to the number of cores you want for mapping reads.
+
+THREADS     8
+
+
+
+##############
+## DATABASES #
+##############
+## This section enables you to configure multiple genomes databases (aligner index 
+## files) to search against in your screen.  For each genome you need to provide a 
+## database name (which can&#39;t contain spaces) and the location of the aligner index 
+## files.
+##
+## The path to the index files SHOULD INCLUDE THE BASENAME of the index, e.g:
+## /data/public/Genomes/Human_Bowtie/GRCh37/Homo_sapiens.GRCh37
+## Thus, the index files (Homo_sapiens.GRCh37.1.bt2, Homo_sapiens.GRCh37.2.bt2, etc.) 
+## are found in a folder named &#39;GRCh37&#39;.
+##
+## If, for example, the Bowtie, Bowtie2 and BWA indices of a given genome reside in 
+## the SAME FOLDER, a SINLGE path may be provided to ALL the of indices.  The index 
+## used will be the one compatible with the chosen aligner (as specified using the 
+## --aligner flag).  
+##
+## The entries shown below are only suggested examples, you can add as many DATABASE 
+## sections as required, and you can comment out or remove as many of the existing 
+## entries as desired.  We suggest including genomes and sequences that may be sources 
+## of contamination either because they where run on your sequencer previously, or may 
+## have contaminated your sample during the library preparation step.
+##
+## Human - sequences available from
+## ftp://ftp.ensembl.org/pub/current/fasta/homo_sapiens/dna/
+#DATABASE   Human   /data/public/Genomes/Human_Bowtie/GRCh37/Homo_sapiens.GRCh37
+##
+## Mouse - sequence available from
+## ftp://ftp.ensembl.org/pub/current/fasta/mus_musculus/dna/
+#DATABASE   Mouse   /data/public/Genomes/Mouse/NCBIM37/Mus_musculus.NCBIM37
+##
+## Ecoli- sequence available from EMBL accession U00096.2
+#DATABASE   Ecoli   /data/public/Genomes/Ecoli/Ecoli
+##
+## PhiX - sequence available from Refseq accession NC_001422.1
+DATABASE phix174    /pine/scr/k/f/kfurtado/RNASeq_202006/Fastq_screen/phix174/phix174
+##
+## Adapters - sequence derived from the FastQC contaminats file found at: www.bioinformatics.babraham.ac.uk/projects/fastqc
+#DATABASE   Adapters    /data/public/Genomes/Contaminants/Contaminants
+##
+## Vector - Sequence taken from the UniVec database
+## http://www.ncbi.nlm.nih.gov/VecScreen/UniVec.html
+#DATABASE   Vectors     /data/public/Genomes/Vectors/Vectors
+##
+## Pig Mitochondria: NCBI Accession NC_000845.1
+## Downloaded locally and transferred to Fastq_screen directory
+DATABASE    pig_mt /pine/scr/k/f/kfurtado/RNASeq_202006/Fastq_screen/pig_mt/pig_mt
+##
+## Human Mitochondria: NCBI Accession NC_012920.1
+## Downloaded locally and transferred to Fastq_screen directory
+DATABASE human_mt /pine/scr/k/f/kfurtado/RNASeq_202006/Fastq_screen/human_mt/human_mt</code></pre></div>
+
+<p>After running Fastq_screen, files ending in _filter are to be used. The <code>--no_hits</code> option extracts genomes that do not align to any of the reference genomes.</p>
+
+<h2 id="toc_6">5. Map merged and screened reads to <em>C.difficile</em> genome using Bowtie2</h2>
+
+<p>Using Bowtie2 aligner because this is a non-splicing aligner, which is more appropriate for prokaryotic samples. </p>
+
+<p>Will need to build <em>C. difficile</em> genome index in the working directory from which the aligner will be run.</p>
+
+<p>For Bowtie2: <a href="http://gensoft.pasteur.fr/docs/bowtie2/2.2.6/#the-bowtie2-aligner">http://gensoft.pasteur.fr/docs/bowtie2/2.2.6/#the-bowtie2-aligner</a></p>
+
+<ul>
+<li>Will need to build an index for <em>C. difficile</em> genome using <code>bowtie2-build</code>. Store indexes in the same directory from which bowtie2 will run; it will look for index files by default here. Or, place them in a designated directory and specify said directory in the script.</li>
+<li>Local alignment or Global (end-to-end) alignment may be used. 
+
+<ul>
+<li>My understanding is that a local alignment is preferred with lower quality or low-signal data (e.g., metatranscriptomics samples from an environment, where the signal for any given microbe may be low). </li>
+<li>In our case, unclear whether local or global alignments would be better; global may be more accurate with low-complexity genomes, but we may lose more reads that are unable to align. Will test both.</li>
+</ul></li>
+</ul>
+
+<p><strong>Test with local and global alignments (also a chance to observe output).</strong></p>
+
+<p>Before running, move fasta file for the reference genome to the current directory and specify the correct filepath in the script. Or, run <code>bowtie2-build</code> separately before running the alignment.</p>
+
+<p><em>The script below is a bit redundant; it first builds the reference genome index in the current directory and then runs bowtie2, specifying a different index location. This is because the test script required a lot of troubleshooting to run; one troubleshoot was to move a previously-built index to a separate folder and specify the filepath there. That may be the best option moving forward, rather than building a new index every time.</em></p>
+
+<p>Chose to subset the data to compare the global and local methods a bit faster.</p>
+
+<p>Creating the test dataset: </p>
+
+<div><pre><code class="language-none">#Went to Fastq_screen directory
+#Created test file with the following
+#Since each FASTQ file has each read split across 4 lines, pulling the first 400,000 lines results in 100,000 reads being pulled.
+
+zcat 1A_filtered_1P.tagged_filter.fastq.gz | head -n 400000 &gt; test.fastq.gz
+
+#move the test file ot the mapping directory using `mv`</code></pre></div>
+
+<p>Test dataset containing 100,000 reads</p>
+
+<div><pre><code class="language-none">#!/bin/bash
+##
+
+#SBATCH --ntasks=10
+#SBATCH -o /pine/scr/k/f/kfurtado/RNASeq_Analysis_202006/Mapping/test.out
+#SBATCH -e /pine/scr/k/f/kfurtado/RNASeq_Analysis_202006/Mapping/test.err
+#SBATCH --mem-per-cpu=10000
+#SBATCH -t 8-00:00:00
+
+echo &quot;Load Bowtie2 Module, v. 2.4.1&quot;
+
+module load bowtie2/2.4.1
+
+echo &quot;Build index for C. difficile genome, reference FN545816.1&quot;
+
+time bowtie2-build -f ./cdifficile_fn545816.1.fasta cdiff
+
+echo &quot;Testing Bowtie2 in Global mode.&quot;
+
+bowtie2 -t -q --phred33 --very-sensitive --dovetail -x /pine/scr/k/f/kfurtado/RNASeq_Analysis_202006/Mapping/cdiff/cdiff -S /pine/scr/k/f/kfurtado/RNASeq_Analysis_202006/Mapping/globaltest.SAM -U &quot;/pine/scr/k/f/kfurtado/RNASeq_Analysis_202006/Mapping/test.fastq.gz&quot; 
+
+echo &quot;Global Test Complete&quot;
+
+echo &quot;Testing Bowtie2 in Local mode.&quot;
+
+bowtie2 -t -q --phred33 --very-sensitive-local --dovetail -x /pine/scr/k/f/kfurtado/RNASeq_Analysis_202006/Mapping/cdiff/cdiff -S /pine/scr/k/f/kfurtado/RNASeq_Analysis_202006/Mapping/localtest.SAM -U &quot;/pine/scr/k/f/kfurtado/RNASeq_Analysis_202006/Mapping/test.fastq.gz&quot; 
+
+echo &quot;Bowtie2 tests Completed&quot;
+echo &quot;Check stderr files for the percentage of successful alignments with each method.&quot;</code></pre></div>
+
+<p>Results from test:</p>
+
+<div><pre><code class="language-none">(base) [kfurtado@longleaf-login1 Mapping]$ cat test.err
+     Genome indexes for use with BOWTIE2 are available
+       in /proj/seq/data .
+     bwa/bowtie/bowtie2 indexes are located in &quot;Sequence&quot; directory
+       under the top level genome directory with name in CAPS, e.g. MM9_UCSC
+Building a SMALL index
+
+real    0m1.976s
+user    0m1.801s
+sys 0m0.069s
+Time loading reference: 00:00:00
+Time loading forward index: 00:00:00
+Time loading mirror index: 00:00:00
+Multiseed full-index search: 00:00:07
+100000 reads; of these:
+  100000 (100.00%) were unpaired; of these:
+    1641 (1.64%) aligned 0 times
+    65105 (65.11%) aligned exactly 1 time
+    33254 (33.25%) aligned &gt;1 times
+98.36% overall alignment rate
+Time searching: 00:00:07
+Overall time: 00:00:07
+Time loading reference: 00:00:00
+Time loading forward index: 00:00:00
+Time loading mirror index: 00:00:00
+Multiseed full-index search: 00:00:07
+100000 reads; of these:
+  100000 (100.00%) were unpaired; of these:
+    1492 (1.49%) aligned 0 times
+    63589 (63.59%) aligned exactly 1 time
+    34919 (34.92%) aligned &gt;1 times
+98.51% overall alignment rate
+Time searching: 00:00:07
+Overall time: 00:00:07</code></pre></div>
+
+<p>Based on this, it seems performance is comparable between global and local, with a global test finding slightly fewer duplicate alignments than a local test.</p>
+
+<p>Repeating the alignment in Global mode to avoid reads mapping more than once, this time using all reads:</p>
+
+<div><pre><code class="language-none">#!/bin/bash
+##
+
+#SBATCH --ntasks=10
+#SBATCH -o /pine/scr/k/f/kfurtado/RNASeq_Analysis_202006/Mapping/run.out
+#SBATCH -e /pine/scr/k/f/kfurtado/RNASeq_Analysis_202006/Mapping/run.err
+#SBATCH --mem-per-cpu=10000
+#SBATCH -t 8-00:00:00
+
+echo &quot;Load Bowtie2 Module, v. 2.4.1&quot;
+
+module load bowtie2/2.4.1
+
+echo &quot;Using Bowtie2 in Global mode.&quot;
+
+for basename in 1A 1B 1C 2A 2B 2C 3A 3B 3C 
+    do bowtie2 -t -q --phred33 --very-sensitive --dovetail -x /pine/scr/k/f/kfurtado/RNASeq_Analysis_202006/Mapping/cdiff/cdiff -S /pine/scr/k/f/kfurtado/RNASeq_Analysis_202006/Mapping/${basename}.SAM -U &quot;/pine/scr/k/f/kfurtado/RNASeq_Analysis_202006/Fastq_screen/${basename}_filtered_1P.tagged_filter.fastq.gz&quot;,&quot;/pine/scr/k/f/kfurtado/RNASeq_Analysis_202006/Fastq_screen/${basename}_filtered_2P.tagged_filter.fastq.gz&quot;,&quot;/pine/scr/k/f/kfurtado/RNASeq_Analysis_202006/Fastq_screen/${basename}_filtered_1U.tagged_filter.fastq.gz&quot;,&quot;/pine/scr/k/f/kfurtado/RNASeq_Analysis_202006/Fastq_screen/${basename}_filtered_2U.tagged_filter.fastq.gz&quot;
+done
+
+echo &quot;Bowtie2 Completed&quot;
+echo &quot;Check stderr files for the percentage of successful alignments with each method.&quot;</code></pre></div>
+
+<p>With <code>--ntasks=10</code> specified, each iteration of the script for each basename takes ~1.5 hours and results in a .SAM file ~30 GB. Use <code>ls -lah</code> to observe progress and assess the size of each file as it&rsquo;s created.</p>
+
+<p><strong>Results from the mapping step:</strong></p>
+
+<div><pre><code class="language-none">(base) [kfurtado@longleaf-login5 Mapping]$ cat run.err
+     Genome indexes for use with BOWTIE2 are available
+       in /proj/seq/data .
+     bwa/bowtie/bowtie2 indexes are located in &quot;Sequence&quot; directory
+       under the top level genome directory with name in CAPS, e.g. MM9_UCSC
+Time loading reference: 00:00:00
+Time loading forward index: 00:00:00
+Time loading mirror index: 00:00:01
+Multiseed full-index search: 01:32:45
+85900599 reads; of these:
+  85900599 (100.00%) were unpaired; of these:
+    1573140 (1.83%) aligned 0 times
+    58679982 (68.31%) aligned exactly 1 time
+    25647477 (29.86%) aligned &gt;1 times
+98.17% overall alignment rate
+Time searching: 01:32:46
+Overall time: 01:32:50
+Time loading reference: 00:00:00
+Time loading forward index: 00:00:00
+Time loading mirror index: 00:00:00
+Multiseed full-index search: 01:25:42
+81153652 reads; of these:
+  81153652 (100.00%) were unpaired; of these:
+    1980127 (2.44%) aligned 0 times
+    59656644 (73.51%) aligned exactly 1 time
+    19516881 (24.05%) aligned &gt;1 times
+97.56% overall alignment rate
+Time searching: 01:25:42
+Overall time: 01:25:43
+Time loading reference: 00:00:00
+Time loading forward index: 00:00:00
+Time loading mirror index: 00:00:00
+Multiseed full-index search: 01:29:30
+84086631 reads; of these:
+  84086631 (100.00%) were unpaired; of these:
+    1823233 (2.17%) aligned 0 times
+    62992115 (74.91%) aligned exactly 1 time
+    19271283 (22.92%) aligned &gt;1 times
+97.83% overall alignment rate
+Time searching: 01:29:30
+Overall time: 01:29:30
+Time loading reference: 00:00:00
+Time loading forward index: 00:00:00
+Time loading mirror index: 00:00:00
+Multiseed full-index search: 01:30:28
+82991912 reads; of these:
+  82991912 (100.00%) were unpaired; of these:
+    1296867 (1.56%) aligned 0 times
+    56445849 (68.01%) aligned exactly 1 time
+    25249196 (30.42%) aligned &gt;1 times
+98.44% overall alignment rate
+Time searching: 01:30:28
+Overall time: 01:30:28
+Time loading reference: 00:00:00
+Time loading forward index: 00:00:00
+Time loading mirror index: 00:00:00
+Multiseed full-index search: 01:36:05
+85926759 reads; of these:
+  85926759 (100.00%) were unpaired; of these:
+    1575610 (1.83%) aligned 0 times
+    61670000 (71.77%) aligned exactly 1 time
+    22681149 (26.40%) aligned &gt;1 times
+98.17% overall alignment rate
+Time searching: 01:36:05
+Overall time: 01:36:05
+Time loading reference: 00:00:00
+Time loading forward index: 00:00:00
+Time loading mirror index: 00:00:00
+Multiseed full-index search: 01:22:16
+73164793 reads; of these:
+  73164793 (100.00%) were unpaired; of these:
+    1373136 (1.88%) aligned 0 times
+    55448201 (75.79%) aligned exactly 1 time
+    16343456 (22.34%) aligned &gt;1 times
+98.12% overall alignment rate
+Time searching: 01:22:16
+Overall time: 01:22:16
+Time loading reference: 00:00:00
+Time loading forward index: 00:00:00
+Time loading mirror index: 00:00:00
+Multiseed full-index search: 01:44:46
+97493607 reads; of these:
+  97493607 (100.00%) were unpaired; of these:
+    1828437 (1.88%) aligned 0 times
+    66934232 (68.65%) aligned exactly 1 time
+    28730938 (29.47%) aligned &gt;1 times
+98.12% overall alignment rate
+Time searching: 01:44:46
+Overall time: 01:44:46
+Time loading reference: 00:00:00
+Time loading forward index: 00:00:00
+Time loading mirror index: 00:00:00
+Multiseed full-index search: 02:05:40
+107626101 reads; of these:
+  107626101 (100.00%) were unpaired; of these:
+    2253693 (2.09%) aligned 0 times
+    81695309 (75.91%) aligned exactly 1 time
+    23677099 (22.00%) aligned &gt;1 times
+97.91% overall alignment rate
+Time searching: 02:05:40
+Overall time: 02:05:40
+Time loading reference: 00:00:00
+Time loading forward index: 00:00:00
+Time loading mirror index: 00:00:00
+Multiseed full-index search: 02:03:25
+96642214 reads; of these:
+  96642214 (100.00%) were unpaired; of these:
+    1977995 (2.05%) aligned 0 times
+    73316194 (75.86%) aligned exactly 1 time
+    21348025 (22.09%) aligned &gt;1 times
+97.95% overall alignment rate
+Time searching: 02:03:25
+Overall time: 02:03:25</code></pre></div>
+
+<h2 id="toc_7">6. Convert .SAM to .BAM (necessary for running FADU in Step 7)</h2>
+
+<p>Samtools is available on the Longleaf Server.</p>
+
+<p>For options regarding Samtools, see: <a href="http://www.htslib.org/doc/samtools.html">http://www.htslib.org/doc/samtools.html</a></p>
+
+<p>Script:</p>
+
+<div><pre><code class="language-none">#!/bin/bash
+##
+
+#SBATCH --ntasks=10
+#SBATCH -o /pine/scr/k/f/kfurtado/RNASeq_Analysis_202006/Mapping/convert.out
+#SBATCH -e /pine/scr/k/f/kfurtado/RNASeq_Analysis_202006/Mapping/convert.err
+#SBATCH --mem-per-cpu=10000
+#SBATCH -t 8-00:00:00
+
+echo &quot;Loading SamTools module&quot;
+
+module load samtools/1.13
+
+echo &quot;Converting .SAM to .BAM and sorting the file by leftmost position.&quot;
+
+for basename in 1A 1B 1C 2A 2B 2C 3A 3B 3C 
+    do samtools view -uS ${basename}.SAM | samtools sort -o ${basename}_sorted.bam
+done
+
+echo &quot;Check directory for sorted .BAM files. Proceed to FADU.&quot;</code></pre></div>
+
+<h2 id="toc_8">7. Running FADU to count genomic features (genes, operons, etc.).</h2>
+
+<p>More information on running FADU can be found here: <a href="https://igs.github.io/FADU/">https://igs.github.io/FADU/</a></p>
+
+<p>Ultimately, I realized that the best way for me to run FADU in the server is to set up a Julia environment in the server, add the necessary packages within the environment, then call the environment within a script and run the program. A version of Julia for conda has been developed and is available on conda forge, but check whether any updates are available or needed for future use. </p>
+
+<p><a href="https://anaconda.org/conda-forge/julia">Julia on Conda Forge</a></p>
+
+<p>To set up environment: </p>
+
+<p><code>conda create -n julia-fadu -c conda-forge julia</code></p>
+
+<p>Then, activate environment: </p>
+
+<p><code>conda activate julia-fadu</code></p>
+
+<p>Once in the environment, opened a Julia interactive session and installed packages using: </p>
+
+<div><pre><code class="language-none">#Opens interactive session
+julia
+
+#Adding required packages
+import Pkg; Pkg.add(&quot;ArgParse&quot;)
+import Pkg; Pkg.add(&quot;BGZFStreams&quot;)
+import Pkg; Pkg.add(&quot;GenomicFeatures&quot;)
+import Pkg; Pkg.add(&quot;GFF3&quot;)
+import Pkg; Pkg.add(&quot;StructArrays&quot;)
+import Pkg; Pkg.add(&quot;Indexes&quot;)
+import Pkg; Pkg.add(&quot;XAM&quot;)
+
+#Check which packages and versions are installed 
+import Pkg; Pkg.installed()
+
+#exit interactive session
+exit()</code></pre></div>
+
+<p>Then deactivate the environment for now with:</p>
+
+<p><code>conda deactivate</code></p>
+
+<p>Output on Package versions:</p>
+
+<div><pre><code class="language-none">┌ Warning: Pkg.installed() is deprecated
+└ @ Pkg /home/conda/feedstock_root/build_artifacts/julia_1632964725130/work/usr/share/julia/stdlib/v1.6/Pkg/src/Pkg.jl:570
+Dict{String, VersionNumber} with 7 entries:
+  &quot;XAM&quot;             =&gt; v&quot;0.2.7&quot;
+  &quot;Indexes&quot;         =&gt; v&quot;0.1.3&quot;
+  &quot;StructArrays&quot;    =&gt; v&quot;0.6.0&quot;
+  &quot;GFF3&quot;            =&gt; v&quot;0.2.1&quot;
+  &quot;BGZFStreams&quot;     =&gt; v&quot;0.3.0&quot;
+  &quot;GenomicFeatures&quot; =&gt; v&quot;2.0.4&quot;
+  &quot;ArgParse&quot;        =&gt; v&quot;1.1.4&quot;</code></pre></div>
+
+<p>Note, I did not have any issues running FADU with the most current versions of these packages. However, if future versions cause issues, you can specify a particular package version upon install with something like the following: </p>
+
+<div><pre><code class="language-none">#Copied from Julia forum:
+Pkg.add(Pkg.PackageSpec(;name=&quot;xxx&quot;, version=&quot;1.2.3&quot;))
+
+#Example given our GenomicFeatures package:
+import Pkg; Pkg.add(Pkg.PackageSpec(;name=&quot;GenomicFeatures&quot;, version=&quot;2.0.0&quot;))</code></pre></div>
+
+<p>Set up environment with necessary packages. Received error that index files for bam files could not be found:</p>
+
+<div><pre><code class="language-none">[ Info: Parsed args:
+[ Info:   bam_file  =&gt;  /pine/scr/k/f/kfurtado/RNASeq_Analysis_202006/Mapping/3C_sorted.bam
+[ Info:   gff3_file  =&gt;  /pine/scr/k/f/kfurtado/RNASeq_Analysis_202006/FADU/fn545816.1.gff3
+[ Info:   stranded  =&gt;  no
+[ Info:   attribute_type  =&gt;  ID
+[ Info:   pp_only  =&gt;  false
+[ Info:   max_fragment_size  =&gt;  1000
+[ Info:   rm_multimap  =&gt;  false
+[ Info:   output_dir  =&gt;  /pine/scr/k/f/kfurtado/RNASeq_Analysis_202006/FADU/fadu_output/
+[ Info:   em_iter  =&gt;  1
+[ Info:   feature_type  =&gt;  gene
+[ Info: Processing annotation features...
+[ Info: Getting unique coordinates per contig and feature...
+[ Info: Initializing dictionary of feature count information
+ERROR: LoadError: Attempted to find index file for BAM file /pine/scr/k/f/kfurtado/RNASeq_Analysis_202006/Mapping/3C_sorted.bam but could not find one
+Stacktrace:
+ [1] error(s::String)
+   @ Base ./error.jl:33
+ [2] main()
+   @ Main /pine/scr/k/f/kfurtado/RNASeq_Analysis_202006/FADU/fadu.jl:147
+ [3] top-level scope
+   @ /pine/scr/k/f/kfurtado/RNASeq_Analysis_202006/FADU/fadu.jl:206
+in expression starting at /pine/scr/k/f/kfurtado/RNASeq_Analysis_202006/FADU/fadu.jl:206
+</code></pre></div>
+
+<p>So, went back to index the bam files. In the future, this can be added to the sorting step.</p>
+
+<div><pre><code class="language-none">#!/bin/bash
+##
+
+#SBATCH --ntasks=10
+#SBATCH -o /pine/scr/k/f/kfurtado/RNASeq_Analysis_202006/Mapping/convert.out
+#SBATCH -e /pine/scr/k/f/kfurtado/RNASeq_Analysis_202006/Mapping/convert.err
+#SBATCH --mem-per-cpu=10000
+#SBATCH -t 8-00:00:00
+
+echo &quot;Loading SamTools module&quot;
+
+module load samtools/1.13
+
+echo &quot;Indexing .bam files.&quot;
+
+for basename in 1A 1B 1C 2A 2B 2C 3A 3B 3C 
+    do samtools index ${basename}_sorted.bam
+done
+
+echo &quot;Check directory for sorted, indexed .BAM files. Proceed to FADU.&quot;</code></pre></div>
+
+<p>Then, re-ran FADU. Note that the lines starting with ##, excepting the header, can be deleted at this point. Also note that setting the variables as in this script can be used in previous scripts too, to make editing filepaths easier. </p>
+
+<div><pre><code class="language-none">(base) [kfurtado@longleaf-login5 FADU]$ cat fadu.sh
+#!/bin/bash
+##
+
+#SBATCH --ntasks=10
+#SBATCH -o /pine/scr/k/f/kfurtado/RNASeq_Analysis_202006/FADU/run.out
+#SBATCH -e /pine/scr/k/f/kfurtado/RNASeq_Analysis_202006/FADU/run.err
+#SBATCH --mem-per-cpu=10000
+#SBATCH -t 8-00:00:00
+
+echo &quot;Setting Variables&quot;
+
+GFF=&quot;/pine/scr/k/f/kfurtado/RNASeq_Analysis_202006/FADU/fn545816.1.gff3&quot;
+BAM=&quot;/pine/scr/k/f/kfurtado/RNASeq_Analysis_202006/Mapping/&quot;
+OUTPUT=&quot;/pine/scr/k/f/kfurtado/RNASeq_Analysis_202006/FADU/fadu_output/&quot;
+
+##echo &quot;Loading Julia &amp; Python Modules&quot;
+
+##module load julia/1.6.2
+
+echo &quot;Open julia environment with required packages for FADU.&quot;
+
+source activate julia-fadu
+
+##echo &quot;Activate Packages&quot;
+
+##julia import Pkg; Pkg.activate()
+
+for basename in 1A 1B 1C 2A 2B 2C 3A 3B 3C 
+    do julia --project=. fadu.jl -b $BAM${basename}_sorted.bam -g $GFF -o $OUTPUT
+done
+
+source deactivate julia-fadu
+
+echo &quot;Check output directory. Subset files and rearrange similar to htseq-count file for DESeq2.&quot;</code></pre></div>
+
+<p><strong>Output from FADU:</strong> </p>
+
+<p>Text files containing a table of feature counts for each file are written to the ./fadu_output directory. First 50 lines from one table:</p>
+
+<div><pre><code class="language-none">(base) [kfurtado@longleaf-login5 fadu_output]$ head -50 1A_sorted.counts.txt 
+featureID   uniq_len    num_alignments  counts  tpm
+gene-16S rRNA   1630    396743.0    395829.41   6241.39
+gene-16S rRNA-2 1779    304514.5    303880.00   4390.23
+gene-16S rRNA-3 1631    316205.0    315149.56   4966.19
+gene-16S rRNA-4 1632    328029.0    319488.84   5031.49
+gene-16S rRNA-5 1625    379795.5    379680.12   6005.17
+gene-16S rRNA-6 1624    320660.0    320425.69   5071.10
+gene-16S rRNA-7 1623    386315.0    385873.59   6110.65
+gene-16S rRNA-8 1625    349669.0    349434.97   5526.80
+gene-16S rRNA-9 1625    336510.0    336398.25   5320.61
+gene-23S rRNA   2951    874654.0    874238.06   7614.15
+gene-23S rRNA-10    2953    735283.0    734868.19   6395.98
+gene-23S rRNA-2 2951    847814.5    847441.44   7380.76
+gene-23S rRNA-3 2631    730358.5    727421.69   7106.02
+gene-23S rRNA-4 2596    871081.0    764301.19   7566.95
+gene-23S rRNA-5 2953    891101.0    890773.00   7752.90
+gene-23S rRNA-6 2953    864049.5    863726.69   7517.50
+gene-23S rRNA-7 2953    877452.5    876799.69   7631.29
+gene-23S rRNA-8 2953    969697.0    969210.94   8435.59
+gene-23S rRNA-9 2953    1022014.5   1021590.75  8891.49
+gene-5S rRNA    117 67.5    26.54   5.83
+gene-5S rRNA-2  117 377.5   57.39   12.61
+gene-5S rRNA-3  117 22.0    16.52   3.63
+gene-5S rRNA-4  117 86.0    21.24   4.67
+gene-5S rRNA-5  117 22.0    15.66   3.44
+gene-5S rRNA-6  117 51.5    12.26   2.69
+gene-5S rRNA-7  117 29.5    26.28   5.77
+gene-5S rRNA-8  117 50.5    38.71   8.50
+gene-CDR20291_0001  510 2188.5  2031.96 102.40
+gene-CDR20291_0002  882 2167.0  1976.02 57.58
+gene-CDR20291_0003  1272    19710.5 19596.31    395.96
+gene-CDR20291_0004  456 6018.5  5853.78 329.94
+gene-CDR20291_0005  1638    11084.5 9906.72 155.45
+gene-CDR20291_0006  351 2486.5  1690.51 123.79
+gene-CDR20291_0007  600 12337.5 12159.07    520.85
+gene-CDR20291_0008  1206    5282.5  5230.86 111.48
+gene-CDR20291_0009  414 232.0   188.77  11.72
+gene-CDR20291_0010  3432    140024.0    139906.91   1047.74
+gene-CDR20291_0011  1929    1401.5  1370.18 18.26
+gene-CDR20291_0012  465 2923.5  2238.52 123.73
+gene-CDR20291_0013  495 5732.5  4877.74 253.26
+gene-CDR20291_0014  1026    14499.5 13626.21    341.34
+gene-CDR20291_0015  2250    51054.5 50618.39    578.21
+gene-CDR20291_0016  1374    6022.0  5845.91 109.35
+gene-CDR20291_0017  1071    1322.5  1186.62 28.48
+gene-CDR20291_0018  1095    19384.5 19204.34    450.76
+gene-CDR20291_0019  2178    7553.0  7297.50 86.11
+gene-CDR20291_0020  846 109.0   108.27  3.29
+gene-CDR20291_0021  1167    29.0    27.17   0.60
+gene-CDR20291_0022  1647    64.0    60.74   0.95</code></pre></div>
+
+<p>Example Standard Error file for one file (same for all files):</p>
+
+<div><pre><code class="language-none">[ Info: Parsed args:
+[ Info:   bam_file  =&gt;  /pine/scr/k/f/kfurtado/RNASeq_Analysis_202006/Mapping/1A_sorted.bam
+[ Info:   gff3_file  =&gt;  /pine/scr/k/f/kfurtado/RNASeq_Analysis_202006/FADU/fn545816.1.gff3
+[ Info:   stranded  =&gt;  no
+[ Info:   attribute_type  =&gt;  ID
+[ Info:   pp_only  =&gt;  false
+[ Info:   max_fragment_size  =&gt;  1000
+[ Info:   rm_multimap  =&gt;  false
+[ Info:   output_dir  =&gt;  /pine/scr/k/f/kfurtado/RNASeq_Analysis_202006/FADU/fadu_output/
+[ Info:   em_iter  =&gt;  1
+[ Info:   feature_type  =&gt;  gene
+[ Info: Processing annotation features...
+[ Info: Getting unique coordinates per contig and feature...
+[ Info: Initializing dictionary of feature count information
+[ Info: Opening BAM alignment file...
+[ Info: Now finding overlaps between alignment and annotation records...
+[ Info: Counting and adjusting multimapped alignment feature counts via Expectation-Maximization algorithm...
+[ Info: Writing counts output to file...
+[ Info: FADU is complete!  Exiting!</code></pre></div>
+
+<p>Next steps: Extract the FeatureID and Counts columns from the output tables, then input to DESeq2!</p>
+
+<h3 id="toc_9">End of Unix/Bash Workflow. Next Steps to be done in R on local machine.</h3>
+
+
+
+<script type="text/javascript">
+var _self="undefined"!=typeof window?window:"undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?self:{},Prism=function(){var e=/\blang(?:uage)?-(\w+)\b/i,t=0,n=_self.Prism={util:{encode:function(e){return e instanceof a?new a(e.type,n.util.encode(e.content),e.alias):"Array"===n.util.type(e)?e.map(n.util.encode):e.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/\u00a0/g," ")},type:function(e){return Object.prototype.toString.call(e).match(/\[object (\w+)\]/)[1]},objId:function(e){return e.__id||Object.defineProperty(e,"__id",{value:++t}),e.__id},clone:function(e){var t=n.util.type(e);switch(t){case"Object":var a={};for(var r in e)e.hasOwnProperty(r)&&(a[r]=n.util.clone(e[r]));return a;case"Array":return e.map&&e.map(function(e){return n.util.clone(e)})}return e}},languages:{extend:function(e,t){var a=n.util.clone(n.languages[e]);for(var r in t)a[r]=t[r];return a},insertBefore:function(e,t,a,r){r=r||n.languages;var l=r[e];if(2==arguments.length){a=arguments[1];for(var i in a)a.hasOwnProperty(i)&&(l[i]=a[i]);return l}var o={};for(var s in l)if(l.hasOwnProperty(s)){if(s==t)for(var i in a)a.hasOwnProperty(i)&&(o[i]=a[i]);o[s]=l[s]}return n.languages.DFS(n.languages,function(t,n){n===r[e]&&t!=e&&(this[t]=o)}),r[e]=o},DFS:function(e,t,a,r){r=r||{};for(var l in e)e.hasOwnProperty(l)&&(t.call(e,l,e[l],a||l),"Object"!==n.util.type(e[l])||r[n.util.objId(e[l])]?"Array"!==n.util.type(e[l])||r[n.util.objId(e[l])]||(r[n.util.objId(e[l])]=!0,n.languages.DFS(e[l],t,l,r)):(r[n.util.objId(e[l])]=!0,n.languages.DFS(e[l],t,null,r)))}},plugins:{},highlightAll:function(e,t){var a={callback:t,selector:'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code'};n.hooks.run("before-highlightall",a);for(var r,l=a.elements||document.querySelectorAll(a.selector),i=0;r=l[i++];)n.highlightElement(r,e===!0,a.callback)},highlightElement:function(t,a,r){for(var l,i,o=t;o&&!e.test(o.className);)o=o.parentNode;o&&(l=(o.className.match(e)||[,""])[1],i=n.languages[l]),t.className=t.className.replace(e,"").replace(/\s+/g," ")+" language-"+l,o=t.parentNode,/pre/i.test(o.nodeName)&&(o.className=o.className.replace(e,"").replace(/\s+/g," ")+" language-"+l);var s=t.textContent,u={element:t,language:l,grammar:i,code:s};if(!s||!i)return n.hooks.run("complete",u),void 0;if(n.hooks.run("before-highlight",u),a&&_self.Worker){var c=new Worker(n.filename);c.onmessage=function(e){u.highlightedCode=e.data,n.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,r&&r.call(u.element),n.hooks.run("after-highlight",u),n.hooks.run("complete",u)},c.postMessage(JSON.stringify({language:u.language,code:u.code,immediateClose:!0}))}else u.highlightedCode=n.highlight(u.code,u.grammar,u.language),n.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,r&&r.call(t),n.hooks.run("after-highlight",u),n.hooks.run("complete",u)},highlight:function(e,t,r){var l=n.tokenize(e,t);return a.stringify(n.util.encode(l),r)},tokenize:function(e,t){var a=n.Token,r=[e],l=t.rest;if(l){for(var i in l)t[i]=l[i];delete t.rest}e:for(var i in t)if(t.hasOwnProperty(i)&&t[i]){var o=t[i];o="Array"===n.util.type(o)?o:[o];for(var s=0;s<o.length;++s){var u=o[s],c=u.inside,g=!!u.lookbehind,h=!!u.greedy,f=0,d=u.alias;u=u.pattern||u;for(var p=0;p<r.length;p++){var m=r[p];if(r.length>e.length)break e;if(!(m instanceof a)){u.lastIndex=0;var y=u.exec(m),v=1;if(!y&&h&&p!=r.length-1){var b=r[p+1].matchedStr||r[p+1],k=m+b;if(p<r.length-2&&(k+=r[p+2].matchedStr||r[p+2]),u.lastIndex=0,y=u.exec(k),!y)continue;var w=y.index+(g?y[1].length:0);if(w>=m.length)continue;var _=y.index+y[0].length,P=m.length+b.length;if(v=3,P>=_){if(r[p+1].greedy)continue;v=2,k=k.slice(0,P)}m=k}if(y){g&&(f=y[1].length);var w=y.index+f,y=y[0].slice(f),_=w+y.length,S=m.slice(0,w),O=m.slice(_),j=[p,v];S&&j.push(S);var A=new a(i,c?n.tokenize(y,c):y,d,y,h);j.push(A),O&&j.push(O),Array.prototype.splice.apply(r,j)}}}}}return r},hooks:{all:{},add:function(e,t){var a=n.hooks.all;a[e]=a[e]||[],a[e].push(t)},run:function(e,t){var a=n.hooks.all[e];if(a&&a.length)for(var r,l=0;r=a[l++];)r(t)}}},a=n.Token=function(e,t,n,a,r){this.type=e,this.content=t,this.alias=n,this.matchedStr=a||null,this.greedy=!!r};if(a.stringify=function(e,t,r){if("string"==typeof e)return e;if("Array"===n.util.type(e))return e.map(function(n){return a.stringify(n,t,e)}).join("");var l={type:e.type,content:a.stringify(e.content,t,r),tag:"span",classes:["token",e.type],attributes:{},language:t,parent:r};if("comment"==l.type&&(l.attributes.spellcheck="true"),e.alias){var i="Array"===n.util.type(e.alias)?e.alias:[e.alias];Array.prototype.push.apply(l.classes,i)}n.hooks.run("wrap",l);var o="";for(var s in l.attributes)o+=(o?" ":"")+s+'="'+(l.attributes[s]||"")+'"';return"<"+l.tag+' class="'+l.classes.join(" ")+'" '+o+">"+l.content+"</"+l.tag+">"},!_self.document)return _self.addEventListener?(_self.addEventListener("message",function(e){var t=JSON.parse(e.data),a=t.language,r=t.code,l=t.immediateClose;_self.postMessage(n.highlight(r,n.languages[a],a)),l&&_self.close()},!1),_self.Prism):_self.Prism;var r=document.currentScript||[].slice.call(document.getElementsByTagName("script")).pop();return r&&(n.filename=r.src,document.addEventListener&&!r.hasAttribute("data-manual")&&document.addEventListener("DOMContentLoaded",n.highlightAll)),_self.Prism}();"undefined"!=typeof module&&module.exports&&(module.exports=Prism),"undefined"!=typeof global&&(global.Prism=Prism);
+</script>
+
+
+</body>
+
+</html>
