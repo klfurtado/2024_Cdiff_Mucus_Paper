@@ -82,7 +82,7 @@ echo "For each pair of input forward and reverse reads, there should be 4 output
 ### 2b. Test effectiveness of trimming using FASTQC
 Use scripts similar to those step 1 to check.
 
-## 3. Create an environment for running Fastq_screen and FLASH2. 
+## 3. Create an environment for running Fastq_screen. 
 
 ```
 module load anaconda
