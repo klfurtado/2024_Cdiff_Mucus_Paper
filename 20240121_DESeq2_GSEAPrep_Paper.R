@@ -17,7 +17,7 @@ library(readxl)
 # SETUP & RUN DESEQ2 ------------------------------------------------------------------------------
 
 #Set seed to allow reproducibility in L2FC
-set.seed(13) #pick a number any number
+set.seed(13)
 
 #Create DESeq Object from counts matrix
 #Input Counts Matrix
@@ -120,7 +120,6 @@ heat.colors <- rev(brewer.pal(9, "RdBu"))
 ### Run pheatmap
 #note: scale = "row" option breaks the colors in the scale by Z-score, which helps with visualization. Z-score is determined after clustering, so samples are still clustered by their counts.
 heatmap_lfc2 <- pheatmap(mat = norm_sig, color = heat.colors, clustering_method="complete", cluster_rows = T, show_rownames=T, annotation= annotation, border_color="white", fontsize = 10, scale = "row", fontsize_row = 10, height=20)
-
 heatmap_lfc1 <- pheatmap(mat = norm_sig, color = heat.colors, clustering_method="complete", cluster_rows = T, show_rownames=F, annotation= annotation, fontsize = 10, scale = "row", fontsize_row = 10, height=20)
 #Save the heatmap as .svg
 
