@@ -1,0 +1,41 @@
+reaction	MeanDecreaseAccuracy	variable	flux	name
+rxn00692_c	16.39930401	iec	-2.725169193	"5,10-Methylenetetrahydrofolate:glycine hydroxymethyltransferase"
+rxn00908_c	16.00553611	iec	-1.865734597	glycine synthase
+rxn05289_c	15.63880639	iec	113.2730018	NADPH:oxidized-thioredoxin oxidoreductase
+rxn01505_c	11.09786091	iec	-530.2622957	"N-Acetyl-D-glucosamine 1-phosphate 1,6-phosphomutase"
+rxn00182_c	10.9613814	iec	-127.5325575	L-glutamate:NAD+ oxidoreductase (deaminating)
+rxn05485_c	10.46270092	iec	-1000	N-Acetyl-D-glucosamine transport via PEP:Pyr PTS
+rxn01644_c	10.33559801	iec	20.9704493	L-Aspartate-4-semialdehyde hydro-lyase (adding pyruvate and cyclizing)
+EX_cpd00035_e	9.822015294	iec	-703.7166571	L-Alanine exchange
+R00258_c	9.778413861	iec	644.3764694	Alanine transaminase
+rxn00337_c	9.748497348	iec	20.9704493	ATP:L-aspartate 4-phosphotransferase
+rxn09341_c	9.627641337	iec	530.2622957	UDP-N-acetyl-D-glucosamine pyrophosphohydrolase (periplasm)
+EX_cpd00107_e	9.40981266	iec	-98.54697447	L-Leucine exchange
+rxn05298_c	9.177564348	iec	28.85814562	Na+/glutamate symport
+rxn05496_c	9.166298583	iec	703.7166571	Amino acid transporter (ala-L)
+rxn02928_c	9.150742955	iec	-20.9704493	"2,3,4,5-Tetrahydrodipicolinate:NAD+ oxidoreductase"
+rxn02005_c	9.143014697	iec	0	trehalose transport via PEP:Pyr PTS
+EX_cpd00067_e	9.135369925	iec	604.6138676	H+ exchange
+rxn05243_c	9.008410594	iec	98.54697447	L-Leucine hydrogen symport
+EX_cpd00023_e	8.971343319	iec	-28.85814562	L-Glutamate exchange
+EX_cpd00122_e	8.935115927	iec	1000	N-Acetyl-D-glucosamine exchange
+rxn00692_c	16.39930401	cdmm	3.193083035	"5,10-Methylenetetrahydrofolate:glycine hydroxymethyltransferase"
+rxn00908_c	16.00553611	cdmm	3.769004405	glycine synthase
+rxn05289_c	15.63880639	cdmm	-8.291323681	NADPH:oxidized-thioredoxin oxidoreductase
+rxn01505_c	11.09786091	cdmm	29.64658526	"N-Acetyl-D-glucosamine 1-phosphate 1,6-phosphomutase"
+rxn00182_c	10.9613814	cdmm	184.5736008	L-glutamate:NAD+ oxidoreductase (deaminating)
+rxn05485_c	10.46270092	cdmm	-118.7353546	N-Acetyl-D-glucosamine transport via PEP:Pyr PTS
+rxn01644_c	10.33559801	cdmm	7.290143916	L-Aspartate-4-semialdehyde hydro-lyase (adding pyruvate and cyclizing)
+EX_cpd00035_e	9.822015294	cdmm	-162.707648	L-Alanine exchange
+R00258_c	9.778413861	cdmm	121.4538706	Alanine transaminase
+rxn00337_c	9.748497348	cdmm	7.290143916	ATP:L-aspartate 4-phosphotransferase
+rxn09341_c	9.627641337	cdmm	-20.07006121	UDP-N-acetyl-D-glucosamine pyrophosphohydrolase (periplasm)
+EX_cpd00107_e	9.40981266	cdmm	-4.422687309	L-Leucine exchange
+rxn05298_c	9.177564348	cdmm	-35.27820475	Na+/glutamate symport
+rxn05496_c	9.166298583	cdmm	162.707648	Amino acid transporter (ala-L)
+rxn02928_c	9.150742955	cdmm	-7.290143916	"2,3,4,5-Tetrahydrodipicolinate:NAD+ oxidoreductase"
+rxn02005_c	9.143014697	cdmm	14.85974335	trehalose transport via PEP:Pyr PTS
+EX_cpd00067_e	9.135369925	cdmm	179.9776319	H+ exchange
+rxn05243_c	9.008410594	cdmm	4.422687309	L-Leucine hydrogen symport
+EX_cpd00023_e	8.971343319	cdmm	35.27820475	L-Glutamate exchange
+EX_cpd00122_e	8.935115927	cdmm	118.7353546	N-Acetyl-D-glucosamine exchange
